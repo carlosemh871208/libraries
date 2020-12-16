@@ -15,3 +15,11 @@ int main(void) {
 	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
 	return EXIT_SUCCESS;
 }
+
+/*
+Log
+
+Author   |    Date    |                   Description                       |
+-----------------------------------------------------------------------------
+Carlos M | 16/12/2020 | First code version.
+*/
