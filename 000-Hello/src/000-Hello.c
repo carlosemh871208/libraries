@@ -1,25 +1,16 @@
-/*
- ============================================================================
- Name        : 000-Hello.c
- Author      : 
- Version     :
- Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
- ============================================================================
- */
-
-#include <stdio.h>
-#include <stdlib.h>
+/****************************************************************************/
+/****************************************************************************/
+#define EXIT_SUCCESS 0U
 
 int main(void) {
-	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
 	return EXIT_SUCCESS;
 }
 
 /*
 Log
 
-Author   |    Date    |                   Description                       |
------------------------------------------------------------------------------
-Carlos M | 16/12/2020 | First code version.
+|  Author   |     Date    |                  Description                     |
+|-----------|-------------|--------------------------------------------------|
+|  Carlos M | 16-Dec-2020 | First code version.                              |
+|  Carlos M | 18-Dec-2020 | C standard libraries removed                     |
 */
