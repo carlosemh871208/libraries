@@ -66,19 +66,6 @@ typedef uint8_t taskState;
   #define REG_BIT_CLEAR32(address, mask)    ((*(volatile uint32_t*)(address))&= ((uint32_t)~((uint32_t)(mask))))
 #endif
 
-/*RTOS task states*/
-/*The task which is executing currently is said to be in running state*/
-#define running   ((uint8_t) 0U)
-
-/*The task which is neither suspended nor blocked but still not executing will be ready state*/
-#define ready     ((uint8_t) 1U)
-
-/*A task will go in blocked state whenever its waiting for a event to happen*/
-#define blocked   ((uint8_t) 2U)
-
-/*The suspended tasks are also not available for scheduling*/
-#define suspended ((uint8_t) 3U)
-
 /******************************************************************************/
 
 
