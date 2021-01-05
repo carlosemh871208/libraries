@@ -6,7 +6,7 @@
 #define SCHEDULER_SCHM_TYPES_H_
 /******************************************************************************/
 /***********************************Includes***********************************/
-#include "Std_Types.h"
+#include <Std_Types.h>
 /******************************************************************************/
 /***************************New types definitions******************************/
 /* The offset values to generate the task periods */
@@ -45,9 +45,9 @@ typedef void (*TaskFunctionPtrType)(void);
 
 /* Structure of a single Task for configuration purposes*/
 typedef struct{
-  SchM_TaskOffsetType SchM_TaskOffset;           /* Offset */
-  SchM_TaskMaskType SchM_TaskMask;               /* Mask */
-  SchM_TaskIDType SchM_TaskID;                   /* Task_ID */
+  SchM_TaskOffsetType SchM_TaskOffset;      /* Offset */
+  SchM_TaskMaskType SchM_TaskMask;          /* Mask */
+  SchM_TaskIDType SchM_TaskID;              /* Task_ID */
   TaskFunctionPtrType SchM_TaskFunctionPtr;	/* Callback, Function Ptr */
 }SchM_TaskConfigType;
 
@@ -60,7 +60,7 @@ typedef enum{
 
 /* Task Control Block Structure */
 typedef struct{
-  SchM_TaskStateType SchM_TaskState;             /* State */
+  SchM_TaskStateType SchM_TaskState;            /* State */
   TaskFunctionPtrType TaskFunctionControlPtr;   /* Function Pointer */
 }SchM_TaskControlBlockType;
 
@@ -74,7 +74,7 @@ typedef enum{
   SCHM_HALTED
 }SchM_SchedulerStateType;
 
-/* Scheduler Control Structure */ //????? add a task_running variable
+/* Scheduler Control Structure */
 typedef struct{
   uint32_t SchM_OsTickCounter;
   SchM_SchedulerStateType SchM_State;
