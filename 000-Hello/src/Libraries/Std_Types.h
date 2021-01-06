@@ -28,6 +28,8 @@ typedef uint8_t boolean;
 #ifndef taskState
 typedef uint8_t taskState;
 #endif
+
+typedef void (*tCallbackFunction)(void);
 /******************************************************************************/
 /*****************************Macros definitions*******************************/
 /*Boolean macros*/

@@ -2,11 +2,11 @@
  * Description:
  *
 *******************************************************************************/
-#ifndef SCHEDULER_SCHM_TYPES_H_
-#define SCHEDULER_SCHM_TYPES_H_
+#ifndef SERVICES_SCHEDULER_SCHM_TYPES_H_
+#define SERVICES_SCHEDULER_SCHM_TYPES_H_
 /******************************************************************************/
 /***********************************Includes***********************************/
-#include <Std_Types.h>
+#include "Std_Types.h"
 /******************************************************************************/
 /***************************New types definitions******************************/
 /* The offset values to generate the task periods */
@@ -95,7 +95,7 @@ extern const SchM_ConfigType SchM_Config;
 /*******************************************************************************
 |   Author    |     Date    |                  Description                     |
 |-------------|-------------|--------------------------------------------------|
-|  Carlos M   | 04-Jan-2021 | Scheduler Inital version.                                  |
+|  Carlos M   | 04-Jan-2021 | Scheduler Inital version.                        |
 *******************************************************************************/
 
 #endif /* SCHEDULER_SCHM_TYPES_H_ */
