@@ -23,7 +23,7 @@ SchM_TaskControlBlockType SchM_TaskControlBlock [NUM_OF_TASKS]; /*Check task sta
 static void SchM_OsTick     (void);
 static void SchM_Background (void);
 
-tCallbackFunction GlbSysTickCallback; /*Generic void callback */
+tCallbackFunction GlbSysTickCallback; /*Generic void callback: Handles the OsTick Function and every tick process the scheduler*/
 static void SysTick_Init (tCallbackFunction Callback);
 /******************************************************************************/
 /************************Exported Function Prototypes**************************/
@@ -38,7 +38,7 @@ void SchM_Init(const SchM_ConfigType *SchM_Config)
 {
 	SchM_ConfigGlobal = SchM_Config;
 	uint8_t LocTaskIdx;
-	SchM_Control.SchM_State = SCHM_UNINIT;
+	SchM_Control.SchM_State = SCHM_UNINIT; /*SchM_Control checks number of ticks and scheduler status*/
 	for(LocTaskIdx = 0U; LocTaskIdx < SchM_ConfigGlobal->SchM_NumOfTasks; LocTaskIdx++){
 		SchM_TaskControlBlock[LocTaskIdx].SchM_TaskState = SCHM_TASK_STATE_SUSPENDED; /*All 6 task state are set up in suspended state */
 	}
@@ -79,10 +79,10 @@ static void SchM_OsTick     (void)
 {
 	uint8_t lub_Index;
 	for(lub_Index = 0U; lub_Index < SchM_ConfigGlobal->SchM_NumOfTasks; lub_Index++){
-	   if(((uint32_t)(SchM_ConfigGlobal->SchM_TaskDescriptor[lub_Index].SchM_TaskMask) & (SchM_Control.SchM_OsTickCounter)) /*Check if Tick counter is equal to task Mask*/
-			== SchM_ConfigGlobal->SchM_TaskDescriptor[lub_Index].SchM_TaskOffset) /*If task and tick are equal check with task offset */
+	   if(((uint32_t)(SchM_ConfigGlobal->SchM_TaskDescriptor[lub_Index].SchM_TaskMask) & (SchM_Control.SchM_OsTickCounter)) /*if((Counter & Mask) == Offset)*/
+			== SchM_ConfigGlobal->SchM_TaskDescriptor[lub_Index].SchM_TaskOffset)
 	   {
-		   if(SCHM_RUNNING == SchM_Control.SchM_State)
+		   if(SCHM_RUNNING == SchM_Control.SchM_State) /*Review if there is any Task in Running or Start State before activating other task*/
 		   {
 			   SchM_Control.SchM_State = SCHM_OVERLOAD;      // Set Overload Flag
 			   //leds_TurnOnDownLED();
@@ -105,19 +105,19 @@ static void SchM_OsTick     (void)
  ******************************************************************************/
 static void SchM_Background (void)
 {
-	uint8_t lub_LocTaskIdx;  // Protect this variable due to an interrupt
-	while(TRUE)
+	uint8_t ub_LocTaskIdx;  // Protect this variable due to an interrupt
+	for(;;)
 	{
-	    for(lub_LocTaskIdx = 0U; lub_LocTaskIdx < SchM_ConfigGlobal->SchM_NumOfTasks; lub_LocTaskIdx++)
+	    for(ub_LocTaskIdx = 0U; ub_LocTaskIdx < SchM_ConfigGlobal->SchM_NumOfTasks; ub_LocTaskIdx++)
 	    {
-	    	if(SCHM_TASK_STATE_READY == SchM_TaskControlBlock[lub_LocTaskIdx].SchM_TaskState)
+	    	if(SCHM_TASK_STATE_READY == SchM_TaskControlBlock[ub_LocTaskIdx].SchM_TaskState)
 	    	{
-	    		SchM_TaskControlBlock[lub_LocTaskIdx].SchM_TaskState = SCHM_TASK_STATE_RUNNING;
+	    		SchM_TaskControlBlock[ub_LocTaskIdx].SchM_TaskState = SCHM_TASK_STATE_RUNNING;
 	    		SchM_Control.SchM_State = SCHM_RUNNING;
 	    		//leds_TurnOnUpLED();
-	    		SchM_ConfigGlobal->SchM_TaskDescriptor[lub_LocTaskIdx].SchM_TaskFunctionPtr();
+	    		SchM_ConfigGlobal->SchM_TaskDescriptor[ub_LocTaskIdx].SchM_TaskFunctionPtr();
 	    		//leds_TurnOffUpLED();
-	    		SchM_TaskControlBlock[lub_LocTaskIdx].SchM_TaskState = SCHM_TASK_STATE_SUSPENDED;
+	    		SchM_TaskControlBlock[ub_LocTaskIdx].SchM_TaskState = SCHM_TASK_STATE_SUSPENDED;
 	    		SchM_Control.SchM_State = SCHM_IDLE;
 	    	}
 	    	else
