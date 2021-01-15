@@ -95,7 +95,6 @@ static void SchM_OsTick     (void)
 	}
 	SchM_Control.SchM_OsTickCounter++;
 }
-
 /*******************************************************************************
  *  Name                 : SchM_Background
  *  Description          : Background Task
