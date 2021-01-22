@@ -4,13 +4,13 @@
 *******************************************************************************/
 /******************************************************************************/
 /***********************************Includes***********************************/
-#include "io.h"
+#include "irq.h"
 /******************************************************************************/
 /***************************New types definitions******************************/
-
+#define Input ((__IO uint32_t) 1U)
 /******************************************************************************/
 /*****************************Macros definitions*******************************/
-#define Input ((uint32_t) 1U)
+
 /******************************************************************************/
 /***************************Constants definitions******************************/
 
@@ -25,46 +25,15 @@
 
 /******************************************************************************/
 /***********************Private Function Implementation************************/
-void IOconfigurePinAsInput (GPIO_Type* Port,__IO uint32_t Pin)
+void NVIC_init_IRQs(IRQn_Type IRQn,uint8_t Priority)
 {
-	Port->PDDR &= ~(Pin);
-}
-
-void IOconfigurePinAsOutput (GPIO_Type* Port,__IO uint32_t Pin)
-{
-	Port->PDDR |= Pin;
-}
-
-void IOtogglePin (GPIO_Type* Port,__O uint32_t Pin)
-{
-	Port->PTOR |= Pin;
-}
-
-void IOsetPinHigh (GPIO_Type* Port,__O uint32_t Pin)
-{
-	Port->PSOR |= Pin;
-}
-
-void IOsetPinLow (GPIO_Type* Port,__O uint32_t Pin)
-{
-	Port->PCOR |= Pin;
-}
-
-boolean IOreadPin (GPIO_Type* Port,__I uint32_t Pin){
-	boolean readPin = FALSE;
-	if(Port->PDIR & (Input << Pin))
-	{
-		readPin = TRUE;
-	}else
-	{
-		/*Do nothing*/
-	}
-	return readPin;
+	S32_NVIC->ICPR[1] = Input<<(IRQn%32U);
+	S32_NVIC->ISER[1] = Input<<(IRQn%32U);
+	S32_NVIC->IP[IRQn] = Priority;
 }
 /******************************************************************************/
 /*******************************************************************************
 |   Author    |     Date    |                  Description                     |
 |-------------|-------------|--------------------------------------------------|
-|  Carlos M   | 15-Jan-2021 | IO Initial version.                              |
+|  Carlos M   | 22-Jan-2021 | IRQ Initial version.                             |
 *******************************************************************************/
-

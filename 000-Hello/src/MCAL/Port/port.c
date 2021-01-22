@@ -4,13 +4,16 @@
 *******************************************************************************/
 /******************************************************************************/
 /***********************************Includes***********************************/
-#include "io.h"
+#include "port.h"
 /******************************************************************************/
 /***************************New types definitions******************************/
 
 /******************************************************************************/
 /*****************************Macros definitions*******************************/
-#define Input ((uint32_t) 1U)
+#define GPIOMASK        ((__IO uint32_t)0x00000100)
+#define ISFMASK         ((__IO uint32_t)0x01000000)
+#define ADCMASK         ((__IO uint32_t)0x00000000)
+#define CLEARIF         ((__IO uint32_t)0x00004000)
 /******************************************************************************/
 /***************************Constants definitions******************************/
 
@@ -25,46 +28,41 @@
 
 /******************************************************************************/
 /***********************Private Function Implementation************************/
-void IOconfigurePinAsInput (GPIO_Type* Port,__IO uint32_t Pin)
+void configurePinADCMuxCtrl (PORT_Type* Port,uint8_t Pin)
 {
-	Port->PDDR &= ~(Pin);
+	Port->PCR[Pin] = ADCMASK;
 }
 
-void IOconfigurePinAsOutput (GPIO_Type* Port,__IO uint32_t Pin)
+void configurePinGPIOMuxCtrl (PORT_Type* Port,uint8_t Pin)
 {
-	Port->PDDR |= Pin;
+	Port->PCR[Pin] = GPIOMASK;
 }
 
-void IOtogglePin (GPIO_Type* Port,__O uint32_t Pin)
+void configurePinIntGPIOMuxCtrl (PORT_Type* Port,uint8_t Pin,__IO uint32_t ISFMask)
 {
-	Port->PTOR |= Pin;
+	Port->PCR[Pin] = ISFMask;
 }
 
-void IOsetPinHigh (GPIO_Type* Port,__O uint32_t Pin)
+boolean getPinISF (PORT_Type* Port,uint8_t Pin)
 {
-	Port->PSOR |= Pin;
-}
-
-void IOsetPinLow (GPIO_Type* Port,__O uint32_t Pin)
-{
-	Port->PCOR |= Pin;
-}
-
-boolean IOreadPin (GPIO_Type* Port,__I uint32_t Pin){
-	boolean readPin = FALSE;
-	if(Port->PDIR & (Input << Pin))
+	boolean ISF = FALSE;
+	if(ISFMASK & Port->PCR[Pin])
 	{
-		readPin = TRUE;
+		ISF =  TRUE;
 	}else
 	{
 		/*Do nothing*/
 	}
-	return readPin;
+	return ISF;
+}
+
+void clearISRF(PORT_Type* Port)
+{
+	Port->ISFR = CLEARIF;
 }
 /******************************************************************************/
 /*******************************************************************************
 |   Author    |     Date    |                  Description                     |
 |-------------|-------------|--------------------------------------------------|
-|  Carlos M   | 15-Jan-2021 | IO Initial version.                              |
+|  Carlos M   | 19-Jan-2021 | Port Initial version.                            |
 *******************************************************************************/
-

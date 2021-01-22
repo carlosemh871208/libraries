@@ -39,6 +39,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/Libraries}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/MCAL}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/MCAL/IO}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/MCAL/Port}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1629809725" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>

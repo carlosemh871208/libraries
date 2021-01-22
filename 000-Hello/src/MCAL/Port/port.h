@@ -2,69 +2,30 @@
  * Description:
  *
 *******************************************************************************/
+#ifndef MCAL_PORT_PORT_H_
+#define MCAL_PORT_PORT_H_
 /******************************************************************************/
 /***********************************Includes***********************************/
-#include "io.h"
+#include "S32K144.h"
 /******************************************************************************/
 /***************************New types definitions******************************/
 
 /******************************************************************************/
 /*****************************Macros definitions*******************************/
-#define Input ((uint32_t) 1U)
-/******************************************************************************/
-/***************************Constants definitions******************************/
 
 /******************************************************************************/
 /*****************************Exported Variables*******************************/
 
 /******************************************************************************/
-/*************************Private Function Prototypes**************************/
-
-/******************************************************************************/
 /************************Exported Function Prototypes**************************/
-
-/******************************************************************************/
-/***********************Private Function Implementation************************/
-void IOconfigurePinAsInput (GPIO_Type* Port,__IO uint32_t Pin)
-{
-	Port->PDDR &= ~(Pin);
-}
-
-void IOconfigurePinAsOutput (GPIO_Type* Port,__IO uint32_t Pin)
-{
-	Port->PDDR |= Pin;
-}
-
-void IOtogglePin (GPIO_Type* Port,__O uint32_t Pin)
-{
-	Port->PTOR |= Pin;
-}
-
-void IOsetPinHigh (GPIO_Type* Port,__O uint32_t Pin)
-{
-	Port->PSOR |= Pin;
-}
-
-void IOsetPinLow (GPIO_Type* Port,__O uint32_t Pin)
-{
-	Port->PCOR |= Pin;
-}
-
-boolean IOreadPin (GPIO_Type* Port,__I uint32_t Pin){
-	boolean readPin = FALSE;
-	if(Port->PDIR & (Input << Pin))
-	{
-		readPin = TRUE;
-	}else
-	{
-		/*Do nothing*/
-	}
-	return readPin;
-}
-/******************************************************************************/
+extern void configurePinADCMuxCtrl (PORT_Type* Port,uint8_t Pin);
+extern void configurePinGPIOMuxCtrl (PORT_Type* Port,uint8_t Pin);
+extern void configurePinIntGPIOMuxCtrl (PORT_Type* Port,uint8_t Pin,__IO uint32_t ISFflag);
+extern boolean getPinISF (PORT_Type* Port,uint8_t Pin);
+extern void clearISRF(PORT_Type* Port);
 /*******************************************************************************
 |   Author    |     Date    |                  Description                     |
 |-------------|-------------|--------------------------------------------------|
-|  Carlos M   | 15-Jan-2021 | IO Initial version.                              |
+|  Carlos M   | 19-Jan-2021 | Port Inital version.                             |
 *******************************************************************************/
-
+#endif /* MCAL_PORT_PORT_H_ */

@@ -18,15 +18,15 @@
 
 /******************************************************************************/
 /************************Exported Function Prototypes**************************/
-extern void IOconfigurePinAsInput(GPIO_Type* Port,__IO uint32_t Pin);
-extern void IOconfigurePinAsOutput(GPIO_Type* Port,__IO uint32_t Pin);
-extern void IOtogglePin(GPIO_Type* Port,__O uint32_t Pin);
-extern void IOsetPinHigh(GPIO_Type* Port, uint32_t Pin);
-extern void IOsetPinLow(GPIO_Type* Port, uint32_t Pin);
-extern boolean IOreadPin(GPIO_Type* Port, uint32_t Pin);
+extern void IOconfigurePinAsInput (GPIO_Type* Port,__IO uint32_t Pin);
+extern void IOconfigurePinAsOutput (GPIO_Type* Port,__IO uint32_t Pin);
+extern void IOtogglePin (GPIO_Type* Port,__O uint32_t Pin);
+extern void IOsetPinHigh (GPIO_Type* Port, uint32_t Pin);
+extern void IOsetPinLow (GPIO_Type* Port, uint32_t Pin);
+extern boolean IOreadPin (GPIO_Type* Port, uint32_t Pin);
 /*******************************************************************************
 |   Author    |     Date    |                  Description                     |
 |-------------|-------------|--------------------------------------------------|
-|  Carlos M   | 15-Jan-2021 | Scheduler Inital version.                        |
+|  Carlos M   | 15-Jan-2021 | IO Inital version.                               |
 *******************************************************************************/
 #endif /* MCAL_IO_IO_H_ */
