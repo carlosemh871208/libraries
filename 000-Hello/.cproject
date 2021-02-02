@@ -34,12 +34,15 @@
 								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.mingw.exe.debug.option.optimization.level.1741935002" name="Optimization Level" superClass="gnu.c.compiler.mingw.exe.debug.option.optimization.level" useByScannerDiscovery="false" valueType="enumerated"/>
 								<option defaultValue="gnu.c.debugging.level.max" id="gnu.c.compiler.mingw.exe.debug.option.debugging.level.816577957" name="Debug Level" superClass="gnu.c.compiler.mingw.exe.debug.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.include.paths.715135863" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/Services}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/Services/Scheduler}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/Libraries}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/MCAL}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/MCAL/IO}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/MCAL/Port}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/ASW}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/BSW}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/BSW/Libraries}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/BSW/MCAL}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/BSW/Services}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/BSW/MCAL/IO}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/BSW/MCAL/MCU}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/BSW/MCAL/Port}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/000-Hello/src/BSW/Services/Scheduler}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1629809725" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
